@@ -1,5 +1,5 @@
 #import os
-import pymongo
+from flask_pymongo import PyMongo
 import math
 import pandas as pd
 from flask import Flask, redirect, url_for, request, render_template, jsonify
@@ -19,8 +19,8 @@ breweries_condensed = pd.read_csv("data/satallite_breweries_removed.csv")
 # establish mongo db connection
 #conn = 'mongodb://localhost:27017'
 #client = MongoClient("mongodb://pharmon9847:ljcx7R9iOsO8oH0b@ds137601.mlab.com:37601/heroku_ffstmrv2")
-#client = MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority")
-client = pymongo.MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority")
+####client = pymongo.MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority")
 
 db = client.nc_craft_breweries
 
@@ -40,6 +40,10 @@ db.breweries_condensed.insert_many(breweries_condensed.to_dict('records'))
 
 
 app = Flask(__name__)
+
+####app.config["MONGO_URI"] = "mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority"
+####mongo = PyMongo(app)
+####db = client.nc_craft_breweries
 
 #client = MongoClient(
 #    os.environ['DB_PORT_27017_TCP_ADDR'],
@@ -99,5 +103,5 @@ def geoData():
     return jsonify(geoJSONs)
 
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0', port=85)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8090, debug=True)
+    #app.run(debug=True)

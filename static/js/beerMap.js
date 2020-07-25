@@ -25,9 +25,9 @@ var customLayer = L.geoJson(null, {
 });
 
 
-// var points = omnivore.csv('/data/nc_breweries_df.csv', null, customLayer);
-// var blah = []
-// brew_list.forEach(js => {
+//var points = omnivore.csv('/data/nc_breweries_df.csv', null, customLayer);
+//var blah = []
+//brew_list.forEach(js => {
 //   var outGeoJson = {}
 //   outGeoJson['properties'] = js
 //   outGeoJson['type']= "Feature"
